@@ -1,24 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+
+import axios, { AxiosResponse } from "axios";
+
+import { IRestaurant } from "./GeneralTypes";
+import React from "react";
+import Table from "./components/Table/Table";
 
 function App() {
+  React.useEffect(() => {
+    let fetchRestaurantData = async () => {
+      try {
+        let restaurantData = await axios.get(
+          "https://code-challenge.spectrumtoolbox.com/api/restaurants",
+          {
+            headers: {
+              Authorization: process.env.REACT_APP_APIKEY,
+            },
+          }
+        );
+        console.log(restaurantData);
+        return restaurantData;
+      } catch (err) {
+        console.log("request error", err);
+      }
+    };
+
+    let fetchedRestaurants = fetchRestaurantData();
+    setRestaurantData(fetchedRestaurants);
+  }, []);
+
+  const [restaurantData, setRestaurantData] = React.useState<any>([]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Table restaurantData={restaurantData} />
     </div>
   );
 }
