@@ -4,36 +4,43 @@ import axios, { AxiosResponse } from "axios";
 
 import { IRestaurant } from "./GeneralTypes";
 import React from "react";
+import Seach from "./components/Search/Search";
 import Table from "./components/Table/Table";
 
 function App() {
   React.useEffect(() => {
     let fetchRestaurantData = async () => {
-      try {
-        let restaurantData = await axios.get(
-          "https://code-challenge.spectrumtoolbox.com/api/restaurants",
-          {
-            headers: {
-              Authorization: process.env.REACT_APP_APIKEY,
-            },
-          }
-        );
-        console.log(restaurantData);
-        return restaurantData;
-      } catch (err) {
-        console.log("request error", err);
-      }
+      let fetchedData = await axios.get(
+        "https://code-challenge.spectrumtoolbox.com/api/restaurants",
+        {
+          headers: {
+            Authorization: process.env.REACT_APP_APIKEY,
+          },
+        }
+      );
+      setRestaurantData(
+        fetchedData.data.sort((a: IRestaurant, b: IRestaurant) => {
+          return a.name > b.name ? 1 : -1;
+        })
+      );
     };
 
-    let fetchedRestaurants = fetchRestaurantData();
-    setRestaurantData(fetchedRestaurants);
+    fetchRestaurantData();
   }, []);
 
   const [restaurantData, setRestaurantData] = React.useState<any>([]);
 
   return (
     <div className="App">
-      <Table restaurantData={restaurantData} />
+      {!restaurantData.length ? (
+        <h2>Loading...</h2>
+      ) : (
+        <>
+          <h1>List of Restaurants</h1>
+          <Seach />
+          <Table restaurantData={restaurantData} />
+        </>
+      )}
     </div>
   );
 }

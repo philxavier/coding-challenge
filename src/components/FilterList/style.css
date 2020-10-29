@@ -1,0 +1,21 @@
+.filter-list-item {
+  background: white;
+  color: purple;
+  position: absolute;
+  width: 100%;
+}
+
+.filter-list-item:hover {
+  background: blue;
+}
+
+.filter-button {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  border-radius: 100px;
+  color: #ce83d3;
+  border: 1px solid white;
+  font-weight: bold;
+}

@@ -1,5 +1,38 @@
-table,
+/* table,
 th,
 td {
   border: 1px solid black;
+} */
+
+.restaurant-table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.restaurant-table td,
+.restaurant-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+}
+
+.restaurant-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.restaurant-table tr:hover {
+  background-color: #ce83d3;
+}
+
+.t-header-style {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.restaurant-table th {
+  text-align: left;
+  background-color: #af4abf;
+  color: white;
 }
