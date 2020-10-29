@@ -1,8 +1,8 @@
-# Restaurant Table
+# Restaurants Table
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-This app will show a list of restaurants fetched from an API and will allow the user to search restaurants by filtering.
+This app will show a list of restaurants fetched from an API and will allow the user to search restaurants through filters.
 
 Users can filter by food genre, by state and also have the option to input a search term. All the filter and the search term will be taken into account when displaying the information to the user
 
