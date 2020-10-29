@@ -1,0 +1,19 @@
+.btn-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.btn {
+  background: purple;
+  padding: 20px;
+  color: white;
+  border-radius: 100px;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.btn:hover {
+  background: #b952c0;
+}

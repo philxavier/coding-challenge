@@ -3,6 +3,7 @@ import "./App.css";
 import axios, { AxiosResponse } from "axios";
 
 import { IRestaurant } from "./GeneralTypes";
+import PaginationButtons from "./components/PaginationButtons/PaginationButtons";
 import React from "react";
 import Seach from "./components/Search/Search";
 import Table from "./components/Table/Table";
@@ -29,6 +30,7 @@ function App() {
   }, []);
 
   const [restaurantData, setRestaurantData] = React.useState<any>([]);
+  const [tablePaginationInd, setTablePaginationInd] = React.useState([0, 9]);
 
   return (
     <div className="App">
@@ -38,7 +40,11 @@ function App() {
         <>
           <h1>List of Restaurants</h1>
           <Seach />
-          <Table restaurantData={restaurantData} />
+          <Table
+            tablePaginationInd={tablePaginationInd}
+            restaurantData={restaurantData}
+          />
+          <PaginationButtons setTablePaginationInd={setTablePaginationInd} />
         </>
       )}
     </div>

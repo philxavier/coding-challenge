@@ -6,6 +6,7 @@ import React from "react";
 
 interface IPropsTable {
   restaurantData: IRestaurant[];
+  tablePaginationInd: number[];
 }
 
 const emojiMapper = (header: string) => {
@@ -25,7 +26,10 @@ const emojiMapper = (header: string) => {
 
 const tableHeaders = ["name", "city", "genre", "state", "telephone"];
 
-export default function Table({ restaurantData }: IPropsTable) {
+export default function Table({
+  restaurantData,
+  tablePaginationInd,
+}: IPropsTable) {
   const getListOfStates = React.useCallback(() => {
     const states = restaurantData.map((ele) => {
       return ele.state;
@@ -53,7 +57,7 @@ export default function Table({ restaurantData }: IPropsTable) {
   React.useEffect(() => {
     const filteredValues: any = filterValues(genreFilter, stateFilter);
     setFilteredData(filteredValues);
-  }, [genreFilter, stateFilter]);
+  }, [genreFilter, stateFilter, tablePaginationInd]);
 
   const filterValues = (genreFilter: any, stateFilter: any) => {
     let restaurantDataCopy = restaurantData.slice();
@@ -121,6 +125,7 @@ export default function Table({ restaurantData }: IPropsTable) {
               );
             })}
           </tr>
+
           {filteredData.map((restaurantObj: any, ind: any) => {
             return (
               <tr key={ind}>
@@ -132,6 +137,9 @@ export default function Table({ restaurantData }: IPropsTable) {
           })}
         </tbody>
       </table>
+      {!filteredData.length ? (
+        <h2>We couldn't find anything at this time =(</h2>
+      ) : null}
     </>
   );
 }
