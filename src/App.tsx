@@ -28,7 +28,7 @@ function App() {
   }, []);
 
   const [restaurantData, setRestaurantData] = React.useState<any>([]);
-  const [searchTerm, setSearchTerm] = React.useState("");
+  const [searchTerm, setSearchTerm] = React.useState<string | null>(null);
 
   return (
     <div className="App">

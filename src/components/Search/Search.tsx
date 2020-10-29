@@ -3,13 +3,15 @@ import "./style.css";
 import React from "react";
 
 interface IPropsSearch {
-  setSearchTerm: (value: string) => void;
+  setSearchTerm: (value: string | null) => void;
 }
 
 export default function Search({ setSearchTerm }: IPropsSearch) {
   const handleChange = (e: any) => {
     const newTerm = e.target.value;
     if (newTerm === "") {
+      debugger;
+
       setSearchTerm("");
     }
     setLocalSearchTerm(newTerm);

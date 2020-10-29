@@ -8,7 +8,7 @@ import { testSearchTerm } from "../HelperFuncs";
 
 interface IPropsTable {
   restaurantData: IRestaurant[];
-  searchTerm: string;
+  searchTerm: string | null;
 }
 
 const emojiMapper = (header: string) => {
@@ -68,7 +68,7 @@ export default function Table({ restaurantData, searchTerm }: IPropsTable) {
   }, [tablePaginationInd]);
 
   React.useEffect(() => {
-    if (!genreFilter && !stateFilter && !searchTerm.length) return;
+    if (!genreFilter && !stateFilter && searchTerm === null) return;
     const filteredValues: any = filterValues(genreFilter, stateFilter);
     setFilteredData(filteredValues);
     setNumOfRestaurants(filteredValues.length);
@@ -99,6 +99,7 @@ export default function Table({ restaurantData, searchTerm }: IPropsTable) {
     }
 
     if (searchTerm) {
+      debugger;
       restaurantDataCopy = restaurantDataCopy.filter((ele: any): void => {
         if (
           testSearchTerm(ele.name, searchTerm) ||
