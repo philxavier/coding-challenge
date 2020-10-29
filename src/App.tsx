@@ -3,7 +3,6 @@ import "./App.css";
 import axios, { AxiosResponse } from "axios";
 
 import { IRestaurant } from "./GeneralTypes";
-import PaginationButtons from "./components/PaginationButtons/PaginationButtons";
 import React from "react";
 import Seach from "./components/Search/Search";
 import Table from "./components/Table/Table";
@@ -39,7 +38,7 @@ function App() {
       ) : (
         <>
           <h1>List of Restaurants</h1>
-          <Seach setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
+          <Seach setSearchTerm={setSearchTerm} />
           <Table searchTerm={searchTerm} restaurantData={restaurantData} />
         </>
       )}

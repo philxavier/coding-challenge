@@ -3,14 +3,20 @@ import "./style.css";
 import React from "react";
 
 interface IPropsSearch {
-  searchTerm: string;
   setSearchTerm: (value: string) => void;
 }
 
-export default function Search({ searchTerm, setSearchTerm }: IPropsSearch) {
+export default function Search({ setSearchTerm }: IPropsSearch) {
   const handleChange = (e: any) => {
     const newTerm = e.target.value;
-    setSearchTerm(newTerm);
+    setLocalSearchTerm(newTerm);
+  };
+
+  const [localSearchterm, setLocalSearchTerm] = React.useState("");
+
+  const handleSearch = (e: any) => {
+    e.preventDefault();
+    setSearchTerm(localSearchterm);
   };
 
   return (
@@ -23,12 +29,14 @@ export default function Search({ searchTerm, setSearchTerm }: IPropsSearch) {
           style={{ marginLeft: "10px", padding: "8px", fontSize: "14px" }}
           type="text"
           placeholder="What you in the mood for?"
-          value={searchTerm}
+          value={localSearchterm}
           onChange={(e) => {
             handleChange(e);
           }}
         />
-        <button className="btn-search">Fooood!</button>
+        <button onClick={handleSearch} className="btn-search">
+          Fooood!
+        </button>
       </form>
     </div>
   );

@@ -4,6 +4,7 @@ import FilterList from "../FilterList/FilterList";
 import { IRestaurant } from "../../GeneralTypes";
 import PaginationButtons from "../PaginationButtons/PaginationButtons";
 import React from "react";
+import { testSearchTerm } from "../HelperFuncs";
 
 interface IPropsTable {
   restaurantData: IRestaurant[];
@@ -28,6 +29,7 @@ const emojiMapper = (header: string) => {
 const tableHeaders = ["name", "city", "genre", "state", "telephone"];
 
 export default function Table({ restaurantData, searchTerm }: IPropsTable) {
+  console.log("-----------", searchTerm);
   const getListOfStates = React.useCallback(() => {
     const states = restaurantData.map((ele) => {
       return ele.state;
@@ -58,7 +60,6 @@ export default function Table({ restaurantData, searchTerm }: IPropsTable) {
   );
 
   React.useEffect(() => {
-    debugger;
     let newData: any = filteredData.slice(
       tablePaginationInd[0],
       tablePaginationInd[1]
@@ -67,7 +68,7 @@ export default function Table({ restaurantData, searchTerm }: IPropsTable) {
   }, [tablePaginationInd]);
 
   React.useEffect(() => {
-    if (!genreFilter && !stateFilter) return;
+    if (!genreFilter && !stateFilter && !searchTerm.length) return;
 
     const filteredValues: any = filterValues(genreFilter, stateFilter);
     setFilteredData(filteredValues);
@@ -94,6 +95,22 @@ export default function Table({ restaurantData, searchTerm }: IPropsTable) {
           return ele;
         } else {
           return ele.state === stateFilter;
+        }
+      });
+    }
+
+    if (searchTerm) {
+      restaurantDataCopy = restaurantDataCopy.filter((ele: any) => {
+        if (
+          testSearchTerm(ele.name, searchTerm) ||
+          testSearchTerm(ele.city, searchTerm) ||
+          testSearchTerm(ele.genre, searchTerm, "genre")
+        ) {
+          return ele;
+        } else {
+          if (searchTerm === "") {
+            return ele;
+          }
         }
       });
     }
