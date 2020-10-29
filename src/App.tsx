@@ -30,7 +30,6 @@ function App() {
   }, []);
 
   const [restaurantData, setRestaurantData] = React.useState<any>([]);
-  const [tablePaginationInd, setTablePaginationInd] = React.useState([0, 9]);
 
   return (
     <div className="App">
@@ -40,11 +39,7 @@ function App() {
         <>
           <h1>List of Restaurants</h1>
           <Seach />
-          <Table
-            tablePaginationInd={tablePaginationInd}
-            restaurantData={restaurantData}
-          />
-          <PaginationButtons setTablePaginationInd={setTablePaginationInd} />
+          <Table restaurantData={restaurantData} />
         </>
       )}
     </div>

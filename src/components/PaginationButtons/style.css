@@ -17,3 +17,11 @@
 .btn:hover {
   background: #b952c0;
 }
+
+.btn-inactive {
+  background: rgb(231, 189, 231);
+  padding: 20px;
+  color: white;
+  border-radius: 100px;
+  margin-left: 15px;
+}

@@ -2,11 +2,11 @@ import "./style.css";
 
 import FilterList from "../FilterList/FilterList";
 import { IRestaurant } from "../../GeneralTypes";
+import PaginationButtons from "../PaginationButtons/PaginationButtons";
 import React from "react";
 
 interface IPropsTable {
   restaurantData: IRestaurant[];
-  tablePaginationInd: number[];
 }
 
 const emojiMapper = (header: string) => {
@@ -26,10 +26,7 @@ const emojiMapper = (header: string) => {
 
 const tableHeaders = ["name", "city", "genre", "state", "telephone"];
 
-export default function Table({
-  restaurantData,
-  tablePaginationInd,
-}: IPropsTable) {
+export default function Table({ restaurantData }: IPropsTable) {
   const getListOfStates = React.useCallback(() => {
     const states = restaurantData.map((ele) => {
       return ele.state;
@@ -53,11 +50,29 @@ export default function Table({
   const [genreFilter, setGenreFilter] = React.useState(null);
   const [stateFilter, setStateFilter] = React.useState(null);
   const [filteredData, setFilteredData] = React.useState(restaurantData);
+  const [paginatedData, setPaginatedData] = React.useState([]);
+  const [tablePaginationInd, setTablePaginationInd] = React.useState([0, 10]);
+  const [numOfRestaurants, setNumOfRestaurants] = React.useState(
+    restaurantData.length
+  );
 
   React.useEffect(() => {
+    debugger;
+    let newData: any = filteredData.slice(
+      tablePaginationInd[0],
+      tablePaginationInd[1]
+    );
+    setPaginatedData(newData);
+  }, [tablePaginationInd]);
+
+  React.useEffect(() => {
+    if (!genreFilter && !stateFilter) return;
+
     const filteredValues: any = filterValues(genreFilter, stateFilter);
     setFilteredData(filteredValues);
-  }, [genreFilter, stateFilter, tablePaginationInd]);
+    setNumOfRestaurants(filteredValues.length);
+    setTablePaginationInd([0, 10]);
+  }, [genreFilter, stateFilter]);
 
   const filterValues = (genreFilter: any, stateFilter: any) => {
     let restaurantDataCopy = restaurantData.slice();
@@ -126,7 +141,7 @@ export default function Table({
             })}
           </tr>
 
-          {filteredData.map((restaurantObj: any, ind: any) => {
+          {paginatedData.map((restaurantObj: any, ind: any) => {
             return (
               <tr key={ind}>
                 {tableHeaders.map((ele, ind) => {
@@ -140,6 +155,12 @@ export default function Table({
       {!filteredData.length ? (
         <h2>We couldn't find anything at this time =(</h2>
       ) : null}
+
+      <PaginationButtons
+        numOfRestaurants={numOfRestaurants}
+        tablePaginationInd={tablePaginationInd}
+        setTablePaginationInd={setTablePaginationInd}
+      />
     </>
   );
 }
