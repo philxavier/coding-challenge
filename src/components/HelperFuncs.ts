@@ -25,17 +25,6 @@ export function testSearchTerm(
       })
       .join(" ");
   }
-  debugger;
 
   return lowerCaseSearchCriteria.includes(termLowerCase);
 }
-
-// export function testSearchInCity(city: string, term: string) {
-//   if (!/^[a-zA-Z0-9]+$/.test(term)) {
-//   }
-// }
-
-// export function testSearchInGenre(genre: string, term: any) {
-//   if (!/^[a-zA-Z0-9]+$/.test(term)) {
-//   }
-// }

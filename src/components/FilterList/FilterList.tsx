@@ -1,6 +1,5 @@
 import "./style.css";
 
-import { IRestaurant } from "../../GeneralTypes";
 import React from "react";
 
 interface IFilterListProps {

@@ -9,6 +9,9 @@ interface IPropsSearch {
 export default function Search({ setSearchTerm }: IPropsSearch) {
   const handleChange = (e: any) => {
     const newTerm = e.target.value;
+    if (newTerm === "") {
+      setSearchTerm("");
+    }
     setLocalSearchTerm(newTerm);
   };
 

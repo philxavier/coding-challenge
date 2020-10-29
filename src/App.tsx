@@ -1,11 +1,10 @@
 import "./App.css";
 
-import axios, { AxiosResponse } from "axios";
-
 import { IRestaurant } from "./GeneralTypes";
 import React from "react";
 import Seach from "./components/Search/Search";
 import Table from "./components/Table/Table";
+import axios from "axios";
 
 function App() {
   React.useEffect(() => {

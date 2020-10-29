@@ -69,7 +69,6 @@ export default function Table({ restaurantData, searchTerm }: IPropsTable) {
 
   React.useEffect(() => {
     if (!genreFilter && !stateFilter && !searchTerm.length) return;
-
     const filteredValues: any = filterValues(genreFilter, stateFilter);
     setFilteredData(filteredValues);
     setNumOfRestaurants(filteredValues.length);
@@ -100,7 +99,7 @@ export default function Table({ restaurantData, searchTerm }: IPropsTable) {
     }
 
     if (searchTerm) {
-      restaurantDataCopy = restaurantDataCopy.filter((ele: any) => {
+      restaurantDataCopy = restaurantDataCopy.filter((ele: any): void => {
         if (
           testSearchTerm(ele.name, searchTerm) ||
           testSearchTerm(ele.city, searchTerm) ||
