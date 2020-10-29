@@ -7,6 +7,7 @@ import React from "react";
 
 interface IPropsTable {
   restaurantData: IRestaurant[];
+  searchTerm: string;
 }
 
 const emojiMapper = (header: string) => {
@@ -26,7 +27,7 @@ const emojiMapper = (header: string) => {
 
 const tableHeaders = ["name", "city", "genre", "state", "telephone"];
 
-export default function Table({ restaurantData }: IPropsTable) {
+export default function Table({ restaurantData, searchTerm }: IPropsTable) {
   const getListOfStates = React.useCallback(() => {
     const states = restaurantData.map((ele) => {
       return ele.state;
@@ -72,7 +73,7 @@ export default function Table({ restaurantData }: IPropsTable) {
     setFilteredData(filteredValues);
     setNumOfRestaurants(filteredValues.length);
     setTablePaginationInd([0, 10]);
-  }, [genreFilter, stateFilter]);
+  }, [genreFilter, stateFilter, searchTerm]);
 
   const filterValues = (genreFilter: any, stateFilter: any) => {
     let restaurantDataCopy = restaurantData.slice();
@@ -96,7 +97,6 @@ export default function Table({ restaurantData }: IPropsTable) {
         }
       });
     }
-
     return restaurantDataCopy;
   };
 

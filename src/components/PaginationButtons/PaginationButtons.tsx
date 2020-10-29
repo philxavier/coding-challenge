@@ -50,7 +50,6 @@ export default function PaginationButtons({
 
   const handleDecreasePagination = () => {
     let newPagInd: any;
-    debugger;
     if (numOfRestaurants) {
       if (tablePaginationInd[0] <= 0) return;
       newPagInd = [tablePaginationInd[0] - 10, tablePaginationInd[1] - 10];

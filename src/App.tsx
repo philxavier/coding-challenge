@@ -30,6 +30,7 @@ function App() {
   }, []);
 
   const [restaurantData, setRestaurantData] = React.useState<any>([]);
+  const [searchTerm, setSearchTerm] = React.useState("");
 
   return (
     <div className="App">
@@ -38,8 +39,8 @@ function App() {
       ) : (
         <>
           <h1>List of Restaurants</h1>
-          <Seach />
-          <Table restaurantData={restaurantData} />
+          <Seach setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
+          <Table searchTerm={searchTerm} restaurantData={restaurantData} />
         </>
       )}
     </div>
